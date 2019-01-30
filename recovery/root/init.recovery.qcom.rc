@@ -1,0 +1,36 @@
+# Separate copy needed to use /sbin/linker64 instead of /system/bin/linker64
+service sbinqseecomd /sbin/qseecomd
+    oneshot
+    disabled
+    user root
+    group root
+    seclabel u:r:recovery:s0
+
+on fs
+    wait /dev/block/platform/soc/7824900.sdhci
+    symlink /dev/block/platform/soc/7824900.sdhci /dev/block/bootdevice
+    # Needed to make qseecomd work in recovery
+    chmod 0777 /dev/qseecom
+    chown system drmrpc /dev/qseecom
+    chmod 0664 /dev/ion
+    chown system system /dev/ion
+    install_keyring
+    
+on property:ro.crypto.state=encrypted
+    start sbinqseecomd
+
+on boot
+    # Set graphic node permissions
+    chown system graphics /sys/class/graphics/fb0/mdp/bw_mode_bitmap
+    chown system graphics /sys/class/graphics/fb0/idle_time
+    chown system graphics /sys/class/graphics/fb0/dynamic_fps
+    chown system graphics /sys/class/graphics/fb0/dyn_pu
+    chown system graphics /sys/class/graphics/fb0/modes
+    chown system graphics /sys/class/graphics/fb0/mode
+    chmod 0664 /sys/class/graphics/fb0/mdp/bw_mode_bitmap
+    chmod 0664 /sys/class/graphics/fb0/idle_time
+    chmod 0664 /sys/class/graphics/fb0/dynamic_fps
+    chmod 0664 /sys/class/graphics/fb0/dyn_pu
+    chmod 0664 /sys/class/graphics/fb0/modes
+    chmod 0664 /sys/class/graphics/fb0/mode
+
