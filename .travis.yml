@@ -1,4 +1,4 @@
-dist: trusty
+dist: xenial
 sudo: required
 git:
   depth: 3
@@ -17,7 +17,7 @@ script:
   - mkdir -p ~/omni
   - cd ~/omni
   - repo init --depth=1 -u git://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni.git -b twrp-8.0
-  - repo sync --force-sync
+  - repo sync --force-sync -j32
   - git clone https://github.com/algphello/honor_atomu_twrp.git -b omni-8.0 device/honor/atomu
   - source build/envsetup.sh
   - lunch omni_atomu-eng
