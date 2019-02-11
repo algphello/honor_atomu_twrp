@@ -57,13 +57,13 @@ TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/recovery/dummykernel
 KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/aarch64/aarch64-linux-android-4.9/bin
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 
-#BOARD_PLAT_PRIVATE_SEPOLICY_DIR += $(DEVICE_PATH)/sepolicy/private
-#BOARD_PLAT_PUBLIC_SEPOLICY_DIR += $(DEVICE_PATH)/sepolicy/public
+BOARD_PLAT_PRIVATE_SEPOLICY_DIR += $(DEVICE_PATH)/sepolicy/private
+BOARD_PLAT_PUBLIC_SEPOLICY_DIR += $(DEVICE_PATH)/sepolicy/public
 include vendor/omni/sepolicy/sepolicy.mk
 
 # Encryption
 TARGET_HW_DISK_ENCRYPTION := true
-#TW_USE_NEW_MINADBD := true
+TW_USE_NEW_MINADBD := true
 TW_INCLUDE_CRYPTO := true
 TW_INCLUDE_FBE := true
 
