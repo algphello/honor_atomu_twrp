@@ -47,6 +47,7 @@ before_script:
   - chmod a+x ~/bin/repo
 script:
   - mkdir -p ~/omni
+  - chmod a+x ~/omni
   - cd ~/omni
   - repo init --depth=1 -u git://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni.git -b twrp-8.0
   - repo sync --force-sync -j32
